@@ -56,10 +56,11 @@ class Player:
     def render(self, screen, camera):
         # Apply the camera transformation to the player's rect
         transformed_rect = camera.apply(self)
+        transformed_rect = pygame.transform.scale(self.image, (transformed_rect.w,transformed_rect.h))
 
         # transformed_rect.inflate((self.rect.width * (camera.zoom - 1), self.rect.height * (camera.zoom - 1)))
         # Rotate the player image
-        rotated_image = pygame.transform.rotate(self.image, self.direction)
+        rotated_image = pygame.transform.rotate(transformed_rect, self.direction)
 
         # Calculate the center of the rotated image
         center = rotated_image.get_rect().center

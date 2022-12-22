@@ -6,7 +6,7 @@ class Vehicle:
         self.y = y  # Initial y position
         self.speed = 0
         self.acceleration = 0
-        self.brake_acceleration = -0.2  # Negative value for braking
+        self.brake_acceleration = -0.6  # Negative value for braking
         self.max_speed = 2  # Speed in pixels per frame
         self.image = pygame.image.load("img/vehicle.png")  # Load the vehicle image
         self.image = pygame.transform.scale(self.image, (125, 76))
