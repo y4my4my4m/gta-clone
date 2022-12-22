@@ -1,5 +1,5 @@
 import pygame
-
+import math
 class Vehicle:
     def __init__(self, x, y, speed):
         self.x = x  # Initial x position
@@ -7,26 +7,37 @@ class Vehicle:
         self.speed = speed  # Speed in pixels per frame
         self.image = pygame.image.load("img/vehicle.png")  # Load the vehicle image
         self.image = pygame.transform.scale(self.image, (125, 76))
-        self.rect = self.image.get_rect()  # Get a rect object for the image to use for collision detection
+        self.rect = self.image.get_rect(center=(self.x, self.y))
         self.occupied = False  # Whether the car is occupied by a player
         self.direction = 0  # Initial direction in degrees
+        self.rotated_image = self.image
 
     def update(self):
         # Update the rect attribute to match the current x and y position
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.move_ip(self.x - self.rect.x, self.y - self.rect.y)
+
         # Check if the car is occupied by a player
         if self.occupied:
             # Update the car's position based on the player's input
             keys = pygame.key.get_pressed()
             if keys[pygame.K_a]:
-                self.x -= self.speed
+                self.direction -= 5
             if keys[pygame.K_d]:
-                self.x += self.speed
+                self.direction += 5
+            # Update the car's position based on the player's input
             if keys[pygame.K_w]:
-                self.y -= self.speed
+                self.x += math.cos(math.radians(self.direction)) * self.speed
+                self.y += math.sin(math.radians(self.direction)) * self.speed
             if keys[pygame.K_s]:
-                self.y += self.speed
+                self.x -= math.cos(math.radians(self.direction)) * self.speed
+                self.y -= math.sin(math.radians(self.direction)) * self.speed
+
+        # Rotate the car image
+        self.rotated_image = pygame.transform.rotate(self.image, -self.direction)
+        # Calculate the center of the rotated image
+        center = self.rotated_image.get_rect().center
+        x = self.x - center[0]
+        y = self.y - center[1]
 
         # Keep the car within the bounds of the screen
         if self.x < 0:
@@ -40,4 +51,4 @@ class Vehicle:
 
     def render(self, screen):
         # Draw the vehicle on the screen
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.rotated_image, (self.x, self.y))

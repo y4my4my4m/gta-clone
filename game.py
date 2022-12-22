@@ -1,5 +1,6 @@
 from player import Player
 from vehicle import Vehicle
+from camera import Camera
 class Game:
     def __init__(self):
         # Initialize game state variables
@@ -8,9 +9,9 @@ class Game:
         self.items = []  # Create a list to store item objects
         self.score = 0  # Initialize the score
         self.vehicles = [Vehicle(230,480,5)]
+        self.camera = Camera(0, 0, 4000, 4000)
 
-    def update(self):
-
+    def update(self):      
         # Update the player's position and state
         self.player.update()
 
@@ -25,6 +26,9 @@ class Game:
         # Update the positions and states of vehicles
         for vehicle in self.vehicles:
             vehicle.update()
+
+        # Update the camera's position
+        self.camera.update(self.player.x, self.player.y)
 
     def render(self, screen):
         # Clear the screen

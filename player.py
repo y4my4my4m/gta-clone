@@ -7,15 +7,14 @@ class Player:
         self.y = y  # Initial y position
         self.speed = 5  # Speed in pixels per frame
         self.image = pygame.image.load("img/player.png")  # Load the player image
-        self.rect = self.image.get_rect()  # Get a rect object for the image to use for collision detection
+        self.rect = self.image.get_rect(center=(self.x, self.y))
         self.direction = 0  # Initial direction in degrees
         self.in_car = False  # Whether the player is currently in a car
         self.car = None  # The car the player is currently in
 
     def update(self):
         # Update the rect attribute to match the current x and y position
-        self.rect.x = self.x
-        self.rect.y = self.y
+        self.rect.move_ip(self.x - self.rect.x, self.y - self.rect.y)
         # Check if the player is in a car
         if self.in_car:
             # Update the player's position to match the car's position
