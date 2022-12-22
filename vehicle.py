@@ -4,7 +4,10 @@ class Vehicle:
     def __init__(self, x, y, speed):
         self.x = x  # Initial x position
         self.y = y  # Initial y position
-        self.speed = speed  # Speed in pixels per frame
+        self.speed = 0
+        self.acceleration = 0
+        self.brake_acceleration = -0.2  # Negative value for braking
+        self.max_speed = 2  # Speed in pixels per frame
         self.image = pygame.image.load("img/vehicle.png")  # Load the vehicle image
         self.image = pygame.transform.scale(self.image, (125, 76))
         self.rect = self.image.get_rect(center=(self.x, self.y))
@@ -20,17 +23,29 @@ class Vehicle:
         if self.occupied:
             # Update the car's position based on the player's input
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_a]:
-                self.direction -= 5
-            if keys[pygame.K_d]:
-                self.direction += 5
-            # Update the car's position based on the player's input
+            if self.speed > -4:  # Only allow turning if the car is moving
+                if keys[pygame.K_a]:
+                    self.direction -= self.speed / 2 
+                if keys[pygame.K_d]:
+                    self.direction += self.speed / 2
+            # Update the car's acceleration based on the player's input
             if keys[pygame.K_w]:
-                self.x += math.cos(math.radians(self.direction)) * self.speed
-                self.y += math.sin(math.radians(self.direction)) * self.speed
+                self.acceleration += 0.1
             if keys[pygame.K_s]:
-                self.x -= math.cos(math.radians(self.direction)) * self.speed
-                self.y -= math.sin(math.radians(self.direction)) * self.speed
+                self.acceleration = self.brake_acceleration  # Apply braking acceleration
+            else:
+                self.acceleration *= 0.9  # Reset acceleration if S key is not pressed
+
+        self.speed += self.acceleration
+        self.x += self.speed * math.cos(math.radians(self.direction))
+        self.y += self.speed * math.sin(math.radians(self.direction))
+        # Apply friction to slow down the car
+        self.speed *= 0.9
+        # Limit the speed to the maximum speed
+        self.speed = max(self.speed, -self.max_speed)
+        self.acceleration = min(1, self.acceleration)
+        self.acceleration = max(0, self.acceleration)
+
 
         # Rotate the car image
         self.rotated_image = pygame.transform.rotate(self.image, -self.direction)
