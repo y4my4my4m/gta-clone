@@ -38,6 +38,8 @@ class Vehicle:
                 self.acceleration = self.brake_acceleration  # Apply braking acceleration
             else:
                 self.acceleration *= 0.9  # Reset acceleration if S key is not pressed
+        else:
+            self.acceleration *= 0.9  # Reset acceleration if S key is not pressed
 
         self.speed += self.acceleration
         self.x += self.speed * math.cos(math.radians(self.direction))
