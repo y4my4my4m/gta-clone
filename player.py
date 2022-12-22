@@ -53,7 +53,11 @@ class Player:
             if self.y > 720:# - self.image.get_height():
                 self.y = 720# - self.image.get_height()
 
-    def render(self, screen):
+    def render(self, screen, camera):
+        # Apply the camera transformation to the player's rect
+        transformed_rect = camera.apply(self)
+
+        # transformed_rect.inflate((self.rect.width * (camera.zoom - 1), self.rect.height * (camera.zoom - 1)))
         # Rotate the player image
         rotated_image = pygame.transform.rotate(self.image, self.direction)
 
@@ -64,7 +68,7 @@ class Player:
 
         # Draw the rotated image on the screen
         if not self.hidden:
-            screen.blit(rotated_image, (x, y))
+            screen.blit(rotated_image, (x,y))
 
     def interact_with_car(self, car):
         # Check if the player is currently in the car

@@ -35,7 +35,7 @@ class Game:
         screen.fill((50, 50, 50))
 
         # Render the player
-        self.player.render(screen)
+        self.player.render(screen, self.camera)
 
         # Render enemies
         for enemy in self.enemies:

@@ -36,14 +36,14 @@ while running:
     game.render(screen)  # Render the player
 
     # Debug
-    debug_text  = font.render(f"Player position: x: {game.player.x}, y: {game.player.y}, car: {game.player.car}, in_car: {game.player.in_car}, direction: {game.player.direction}", True, (255, 255, 255))
+    debug_text  = font.render(f"Player position: x: {game.player.x}, y: {game.player.y}, rect: {game.player.rect}, car: {game.player.car}, in_car: {game.player.in_car}, direction: {game.player.direction}", True, (255, 255, 255))
     screen.blit(debug_text, (40, 40))
     debug_text  = font.render(f"Player rect: x: {game.player.rect}", True, (255, 255, 255))
     screen.blit(debug_text, (40, 60))
     for car in game.vehicles:
         debug_text  = font.render(f"Car position: x: {car.x}, y: {car.y}, speed: {car.speed}, accel: {car.acceleration}, max_speed: {car.max_speed}, rect: {car.rect}, occupied: {car.occupied}, direction: {car.direction}", True, (255, 255, 255))
         screen.blit(debug_text, (40, 80))
-    debug_text  = font.render(f"Camera: x: {game.camera.x}, y: {game.camera.y}", True, (255, 255, 255))
+    debug_text  = font.render(f"Camera: x: {game.camera.x}, y: {game.camera.y}, zoom: {game.camera.zoom}", True, (255, 255, 255))
     screen.blit(debug_text, (40, 100))
 
     pygame.display.flip()  # Update the display
