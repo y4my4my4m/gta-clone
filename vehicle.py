@@ -15,6 +15,9 @@ class Vehicle:
         self.direction = 0  # Initial direction in degrees
         self.rotated_image = self.image
 
+        self.x2 = 0
+        self.y2 = 0
+
     def update(self):
         # Update the rect attribute to match the current x and y position
         self.rect.move_ip(self.x - self.rect.x, self.y - self.rect.y)
@@ -51,8 +54,8 @@ class Vehicle:
         self.rotated_image = pygame.transform.rotate(self.image, -self.direction)
         # Calculate the center of the rotated image
         center = self.rotated_image.get_rect().center
-        x = self.x - center[0]
-        y = self.y - center[1]
+        self.x2 = self.x - center[0]
+        self.y2 = self.y - center[1]
 
         # Keep the car within the bounds of the screen
         if self.x < 0:
@@ -66,4 +69,4 @@ class Vehicle:
 
     def render(self, screen):
         # Draw the vehicle on the screen
-        screen.blit(self.rotated_image, (self.x, self.y))
+        screen.blit(self.rotated_image, (self.x2, self.y2))

@@ -11,6 +11,7 @@ class Player:
         self.direction = 0  # Initial direction in degrees
         self.in_car = False  # Whether the player is currently in a car
         self.car = None  # The car the player is currently in
+        self.hidden = False  # Whether the player is hidden
 
     def update(self):
         # Update the rect attribute to match the current x and y position
@@ -62,7 +63,8 @@ class Player:
         y = self.y - center[1]
 
         # Draw the rotated image on the screen
-        screen.blit(rotated_image, (x, y))
+        if not self.hidden:
+            screen.blit(rotated_image, (x, y))
 
     def interact_with_car(self, car):
         # Check if the player is currently in the car
@@ -71,6 +73,7 @@ class Player:
             self.in_car = False
             self.car = None
             car.occupied = False
+            self.hidden = False
         else:
             # Check if the car is occupied
             if car.occupied:
@@ -79,3 +82,4 @@ class Player:
             self.in_car = True
             self.car = car
             car.occupied = True
+            self.hidden = True
