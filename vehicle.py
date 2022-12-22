@@ -12,7 +12,9 @@ class Vehicle:
         self.direction = 0  # Initial direction in degrees
 
     def update(self):
-
+        # Update the rect attribute to match the current x and y position
+        self.rect.x = self.x
+        self.rect.y = self.y
         # Check if the car is occupied by a player
         if self.occupied:
             # Update the car's position based on the player's input
@@ -29,12 +31,12 @@ class Vehicle:
         # Keep the car within the bounds of the screen
         if self.x < 0:
             self.x = 0
-        if self.x > 640 - self.image.get_width():
-            self.x = 640 - self.image.get_width()
+        if self.x > 1024:# - self.image.get_width():
+            self.x = 1024# - self.image.get_width()
         if self.y < 0:
             self.y = 0
-        if self.y > 480 - self.image.get_height():
-            self.y = 480 - self.image.get_height()
+        if self.y > 720:# - self.image.get_height():
+            self.y = 720# - self.image.get_height()
 
     def render(self, screen):
         # Draw the vehicle on the screen

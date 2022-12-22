@@ -7,7 +7,7 @@ class Game:
         self.enemies = []  # Create a list to store enemy objects
         self.items = []  # Create a list to store item objects
         self.score = 0  # Initialize the score
-        self.vehicles = [Vehicle(50,50,5), Vehicle(230,480,0)]
+        self.vehicles = [Vehicle(230,480,5)]
 
     def update(self):
 

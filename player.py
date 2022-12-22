@@ -13,6 +13,9 @@ class Player:
         self.car = None  # The car the player is currently in
 
     def update(self):
+        # Update the rect attribute to match the current x and y position
+        self.rect.x = self.x
+        self.rect.y = self.y
         # Check if the player is in a car
         if self.in_car:
             # Update the player's position to match the car's position

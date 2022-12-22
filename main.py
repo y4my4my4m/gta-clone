@@ -3,6 +3,9 @@ from game import Game
 # Initialize Pygame
 pygame.init()
 
+# Create a font object
+font = pygame.font.Font(None, 20)
+
 # Set up the game window
 screen = pygame.display.set_mode((1024, 720))
 pygame.display.set_caption("My GTA-style Game")
@@ -14,11 +17,6 @@ game = Game()
 # Main game loop
 running = True
 while running:
-    # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
     # Handle events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -35,6 +33,15 @@ while running:
 
     # Render the game
     game.render(screen)  # Render the player
+
+    # Debug
+    debug_text  = font.render(f"Player position: x: {game.player.x}, y: {game.player.y}, car: {game.player.car}, in_car: {game.player.in_car}", True, (255, 255, 255))
+    screen.blit(debug_text, (40, 40))
+    debug_text  = font.render(f"Player rect: x: {game.player.rect}", True, (255, 255, 255))
+    screen.blit(debug_text, (40, 60))
+    for car in game.vehicles:
+        debug_text  = font.render(f"Car position: x: {car.x}, y: {car.y}, rect: {car.rect}, occupied: {car.occupied}", True, (255, 255, 255))
+        screen.blit(debug_text, (40, 80))
 
     pygame.display.flip()  # Update the display
 
