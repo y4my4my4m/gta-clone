@@ -23,14 +23,14 @@ class Camera:
         if keys[pygame.K_LEFTBRACKET]:
             self.zoom /= 1.1
         # Keep the camera within the bounds of the world
-        # if self.x < 0:
-        #     self.x = 0
-        # if self.y < 0:
-        #     self.y = 0
-        # if self.x + self.screen_width > self.world_width:
-        #     self.x = self.world_width - self.screen_width
-        # if self.y + self.screen_height > self.world_height:
-        #     self.y = self.world_height - self.screen_height
+        if self.x < 0:
+            self.x = 0
+        if self.y < 0:
+            self.y = 0
+        if self.x + self.screen_width > self.world_width:
+            self.x = self.world_width - self.screen_width
+        if self.y + self.screen_height > self.world_height:
+            self.y = self.world_height - self.screen_height
 
     def zoom_in(self):
         # Zoom in by a factor of 1.1
