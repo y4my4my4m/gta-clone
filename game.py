@@ -47,4 +47,4 @@ class Game:
 
         # Render vehicles
         for vehicle in self.vehicles:
-            vehicle.render(screen)
+            vehicle.render(screen, self.camera)

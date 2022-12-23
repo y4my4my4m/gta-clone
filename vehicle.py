@@ -69,6 +69,11 @@ class Vehicle:
         if self.y > 720:# - self.image.get_height():
             self.y = 720# - self.image.get_height()
 
-    def render(self, screen):
+    def render(self, screen, camera):
         # Draw the vehicle on the screen
+        transformed_rect = camera.apply(self)
+        transformed_rect = pygame.transform.scale(self.image, (transformed_rect.w,transformed_rect.h))
+
+        self.rotated_image = pygame.transform.rotate(transformed_rect, -self.direction)
+        
         screen.blit(self.rotated_image, (self.x2, self.y2))
