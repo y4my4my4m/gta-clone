@@ -31,8 +31,14 @@ while running:
                 debug = not debug
             if event.key == pygame.K_SPACE:
                 # Check if the player is colliding with any cars
+                # for car in game.vehicles:
+                #     if game.player.rect.colliderect(car.rect):
+                #         # The player is colliding with a car, so interact with it
+                #         game.player.interact_with_car(car)
+                # Check if the player is colliding with any cars
                 for car in game.vehicles:
-                    if game.player.rect.colliderect(car.rect):
+                    transformed_player_rect = game.camera.apply(game.player)  # Transform the player's rect to screen coordinates
+                    if transformed_player_rect.colliderect(car.rect):  # Use the transformed rect for the collision check
                         # The player is colliding with a car, so interact with it
                         game.player.interact_with_car(car)
     # Update game state
