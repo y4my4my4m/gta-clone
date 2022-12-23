@@ -13,7 +13,7 @@ class Game:
         self.items = []  # Create a list to store item objects
         self.score = 0  # Initialize the score
         self.vehicles = [Vehicle(230,480,5)]
-        self.camera = Camera(screen_width, screen_height, 4640*4, 4672*4)
+        self.camera = Camera(screen_width, screen_height, 4640, 4672)
         self.enemies.append(testNPC)
         self.background = Background(0, 0, 4640*4, 4672*4, "img/libertycity.png")
 
@@ -25,12 +25,12 @@ class Game:
         self.player.update(self.camera)
 
         # Update the positions and states of enemies
-        for enemy in self.enemies:
-            enemy.update()
+        # for enemy in self.enemies:
+        #     enemy.update()
 
-        # Update the positions and states of items
-        for item in self.items:
-            item.update()
+        # # Update the positions and states of items
+        # for item in self.items:
+        #     item.update()
 
         # Update the positions and states of vehicles
         for vehicle in self.vehicles:
@@ -52,12 +52,12 @@ class Game:
         self.player.render(screen, self.camera)
 
         # Render enemies
-        for enemy in self.enemies:
-            enemy.render(screen)
+        # for enemy in self.enemies:
+        #     enemy.render(screen)
 
         # Render items
-        for item in self.items:
-            item.render(screen)
+        # for item in self.items:
+        #     item.render(screen)
 
         # Render vehicles
         for vehicle in self.vehicles:
@@ -65,4 +65,4 @@ class Game:
 
         # Update the positions and states of NPCs
         for npc in self.npcs:
-            npc.render(screen)
+            npc.render(screen, self.camera)

@@ -4,6 +4,8 @@ class Vehicle:
     def __init__(self, x, y, speed):
         self.x = x  # Initial x position
         self.y = y  # Initial y position
+        self.pos_x = 0
+        self.pos_y = 0
         self.speed = 0
         self.acceleration = 0
         self.brake_acceleration = -0.6  # Negative value for braking
@@ -71,9 +73,14 @@ class Vehicle:
 
     def render(self, screen, camera):
         # Draw the vehicle on the screen
-        transformed_rect = camera.apply(self)
-        transformed_rect = pygame.transform.scale(self.image, (transformed_rect.w,transformed_rect.h))
+        # Calculate the x and y positions of the top-left corner of the background image
+        x = self.x - camera.x
+        y = self.y - camera.y
+        screen.blit(self.image, (x, y))
+        # transformed_rect = camera.apply(self)
+        # transformed_rect = pygame.transform.scale(self.image, (transformed_rect.w,transformed_rect.h))
 
-        self.rotated_image = pygame.transform.rotate(transformed_rect, -self.direction)
+        # self.rotated_image = pygame.transform.rotate(transformed_rect, -self.direction)
         
-        screen.blit(self.rotated_image, (self.x2, self.y2))
+        # screen.blit(self.rotated_image, (self.x2, self.y2))
+

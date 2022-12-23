@@ -6,6 +6,8 @@ class NPC:
     def __init__(self, x, y, speed, game):
         self.x = x  # Initial x position
         self.y = y  # Initial y position
+        self.pos_x = 0
+        self.pos_y = 0
         self.speed = speed # Initial speed
         self.image = pygame.image.load("img/npc.png")  # Load the NPC image
         self.rect = self.image.get_rect(center=(self.x, self.y))
@@ -39,10 +41,12 @@ class NPC:
         # if self.dead:
         #     self.game.enemies.remove(self)  # Remove the NPC from the game's enemies list
 
-    def render(self, screen):
+    def render(self, screen, camera):
         if (self.dead == False):
+            x = self.x - camera.x
+            y = self.y - camera.y
             # Draw the NPC on the screen
-            screen.blit(self.rotated_image, (self.x, self.y))
+            screen.blit(self.rotated_image, (x, y))
 
     def hit_by_vehicle(self):
         # Check if the NPC's rect is colliding with a vehicle's rect

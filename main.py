@@ -32,6 +32,8 @@ while running:
             if event.key == pygame.K_SPACE:
                 # Check if the player is colliding with any cars
                 for car in game.vehicles:
+                    # there should be a hitbox in the center or detect the camera focus point
+                    # the player is always centered
                     if game.player.rect.colliderect(car.rect):
                         # The player is colliding with a car, so interact with it
                         game.player.interact_with_car(car)

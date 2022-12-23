@@ -11,7 +11,8 @@ class Camera:
         self.y = self.screen_height/2  # Initial y position of the camera
         self.zoom = 1  # Initial zoom level
         self.speed = 5
-
+        self.rect = pygame.Surface((30, 42))
+        
     def update(self, x, y):
         # Update the camera's position to follow the given x and y coordinates
         self.x = x - self.screen_width // 2
