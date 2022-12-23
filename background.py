@@ -20,6 +20,6 @@ class Background:
         self.x = -camera.x
         self.y = -camera.y
 
-    def render(self, screen):
+    def render(self, screen, camera):
         # Draw the background on the screen
         screen.blit(self.image, (self.x, self.y))

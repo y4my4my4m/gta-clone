@@ -43,7 +43,7 @@ while running:
     for car in game.vehicles:
         debug_text  = font.render(f"Car position: x: {car.x:.2f}, y: {car.y:.2f}, speed: {car.speed:.2f}, accel: {car.acceleration:.2f}, max_speed: {car.max_speed:.2f}, rect: {car.rect}, occupied: {car.occupied}, direction: {car.direction:.2f}", True, (255, 255, 255))
         screen.blit(debug_text, (40, 80))
-    debug_text  = font.render(f"Camera: x: {game.camera.x:.2f}, y: {game.camera.y:.2f}, zoom: {game.camera.zoom}", True, (255, 255, 255))
+    debug_text  = font.render(f"Camera: x: {game.camera.x:.2f}, y: {game.camera.y:.2f}, zoom: {game.camera.zoom}, scr_width: {game.camera.screen_width:.2f}, scr_height: {game.camera.screen_height:.2f}, wrl_width: {game.camera.world_width:.2f}, wrl_height: {game.camera.world_height: .2f}", True, (255, 255, 255))
     screen.blit(debug_text, (40, 100))
 
     pygame.display.flip()  # Update the display

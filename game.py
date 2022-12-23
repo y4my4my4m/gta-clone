@@ -13,7 +13,7 @@ class Game:
         self.items = []  # Create a list to store item objects
         self.score = 0  # Initialize the score
         self.vehicles = [Vehicle(230,480,5)]
-        self.camera = Camera(0, 0, 4000, 4000)
+        self.camera = Camera(640, 480, 4000, 4000)
         self.enemies.append(testNPC)
         self.background = Background(0, 0, 4640*4, 4672*4, "img/libertycity.png")
 
@@ -47,7 +47,7 @@ class Game:
         # Clear the screen
         screen.fill((50, 50, 50))
 
-        self.background.render(screen)
+        self.background.render(screen, self.camera)
         # Render the player
         self.player.render(screen, self.camera)
 
