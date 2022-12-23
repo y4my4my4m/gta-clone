@@ -41,11 +41,7 @@ class Game:
         self.camera.update(self.player.x, self.player.y)
 
         # Update the background's position based on the camera's position
-        # self.background.update(self.player.x, self.player.y)
         self.background.update(self.camera)
-
-        # # Update the background position based on the player's position
-        # self.background_x = -self.player.x + 640 / 2  # 640 is the 
 
     def render(self, screen):
         # Clear the screen
