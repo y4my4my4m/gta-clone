@@ -7,7 +7,7 @@ class NPC:
         self.x = x  # Initial x position
         self.y = y  # Initial y position
         self.speed = speed # Initial speed
-        self.image = pygame.image.load("img/player.png")  # Load the NPC image
+        self.image = pygame.image.load("img/npc.png")  # Load the NPC image
         self.rect = self.image.get_rect(center=(self.x, self.y))
         self.direction = random.randint(0, 360)  # Initial direction in degrees
         self.speed = random.uniform(0.5, 1.5)  # Speed in pixels per frame

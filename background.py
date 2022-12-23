@@ -21,5 +21,17 @@ class Background:
         self.y = -camera.y
 
     def render(self, screen, camera):
+        # Calculate the x and y positions of the top-left corner of the background image
+        x = self.x - camera.x
+        y = self.y - camera.y
         # Draw the background on the screen
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.image, (x, y))
+        # # If the image is not wide enough to fill the screen, draw an additional copy to the right of the first image
+        # if x + self.world_width < self.screen_width:
+        #     screen.blit(self.image, (x + self.world_width, y))
+        # # If the image is not tall enough to fill the screen, draw an additional copy below the first image
+        # if y + self.world_height < self.screen_height:
+        #     screen.blit(self.image, (x, y + self.world_height))
+        # # If the image is not wide or tall enough to fill the screen, draw an additional copy in the bottom-right corner
+        # if x + self.world_width < self.screen_width and y + self.world_height < self.screen_height:
+        #     screen.blit(self.image, (x + self.world_width, y + self.world_height))

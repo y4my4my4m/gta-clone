@@ -6,20 +6,23 @@ from background import Background
 class Game:
     def __init__(self):
         # Initialize game state variables
-        self.player = Player(640,480)  # Create a player object
+        self.player = Player(640,480,1024,720)  # Create a player object
         self.enemies = []  # Create a list to store enemy objects
         testNPC = NPC(450,120,2,self)
         self.npcs = [testNPC]  # Create a list to store NPC objects
         self.items = []  # Create a list to store item objects
         self.score = 0  # Initialize the score
         self.vehicles = [Vehicle(230,480,5)]
-        self.camera = Camera(640, 480, 4000, 4000)
+        self.camera = Camera(1024, 720, 1024, 720)
         self.enemies.append(testNPC)
         self.background = Background(0, 0, 4640*4, 4672*4, "img/libertycity.png")
 
     def update(self):      
+        # Update the camera's position
+        self.camera.update(self.player.x, self.player.y)
+
         # Update the player's position and state
-        self.player.update()
+        self.player.update(self.camera)
 
         # Update the positions and states of enemies
         for enemy in self.enemies:
@@ -36,9 +39,6 @@ class Game:
         # Update the positions and states of NPCs
         for npc in self.npcs:
             npc.update()
-
-        # Update the camera's position
-        self.camera.update(self.player.x, self.player.y)
 
         # Update the background's position based on the camera's position
         self.background.update(self.camera)

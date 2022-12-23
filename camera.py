@@ -18,6 +18,10 @@ class Camera:
         self.y = y - self.screen_height // 2
             
         keys = pygame.key.get_pressed()
+        self.x += self.speed if keys[pygame.K_a] else 0
+        self.x -= self.speed if keys[pygame.K_d] else 0
+        self.y += self.speed if keys[pygame.K_w] else 0
+        self.y -= self.speed if keys[pygame.K_s] else 0
         if keys[pygame.K_RIGHTBRACKET]:
             self.zoom *= 1.1
         if keys[pygame.K_LEFTBRACKET]:
@@ -40,14 +44,6 @@ class Camera:
         # Zoom out by a factor of 1.1
         self.zoom /= 1.1
 
-    # def apply(self, entity):
-    #     # Convert the entity's position from world coordinates to screen coordinates
-    #     x, y = entity.rect.x + self.x, entity.rect.y + self.y
-    #     # Inflate or deflate the rect based on the zoom level
-    #     w, h = entity.rect.width * self.zoom, entity.rect.height * self.zoom
-    #     # Create a new rect with the transformed coordinates and size
-    #     transformed_rect = pygame.Rect(x, y, w, h)
-    #     return transformed_rect
     def apply(self, entity):
         # Create a copy of the entity's rect
         transformed_rect = entity.rect.copy()
