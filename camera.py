@@ -18,10 +18,6 @@ class Camera:
         self.y = y - self.screen_height // 2
             
         keys = pygame.key.get_pressed()
-        self.x += self.speed if keys[pygame.K_a] else 0
-        self.x -= self.speed if keys[pygame.K_d] else 0
-        self.y += self.speed if keys[pygame.K_w] else 0
-        self.y -= self.speed if keys[pygame.K_s] else 0
         if keys[pygame.K_RIGHTBRACKET]:
             self.zoom *= 1.1
         if keys[pygame.K_LEFTBRACKET]:

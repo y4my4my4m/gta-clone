@@ -26,7 +26,7 @@ class Background:
         y = self.y - camera.y
         # Draw the background on the screen
         screen.blit(self.image, (x, y))
-        # # If the image is not wide enough to fill the screen, draw an additional copy to the right of the first image
+        # If the image is not wide enough to fill the screen, draw an additional copy to the right of the first image
         # if x + self.world_width < self.screen_width:
         #     screen.blit(self.image, (x + self.world_width, y))
         # # If the image is not tall enough to fill the screen, draw an additional copy below the first image

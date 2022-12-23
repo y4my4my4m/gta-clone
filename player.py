@@ -35,8 +35,6 @@ class Player:
             self.direction = math.degrees(radians)
 
             # Check for input from the player
-            self.x = camera.x + self.screen_width // 2
-            self.y = camera.y + self.screen_height // 2
             keys = pygame.key.get_pressed()
             # if keys[pygame.K_a]:
             #     self.x -= self.speed
@@ -46,10 +44,12 @@ class Player:
             #     self.y -= self.speed
             # if keys[pygame.K_s]:
             #     self.y += self.speed
-            # camera.x += self.speed if keys[pygame.K_a] else 0
-            # camera.x -= self.speed if keys[pygame.K_d] else 0
-            # camera.y += self.speed if keys[pygame.K_w] else 0
-            # camera.y -= self.speed if keys[pygame.K_s] else 0
+            camera.x -= self.speed if keys[pygame.K_a] else 0
+            camera.x += self.speed if keys[pygame.K_d] else 0
+            camera.y -= self.speed if keys[pygame.K_w] else 0
+            camera.y += self.speed if keys[pygame.K_s] else 0
+            # self.x = camera.x + self.screen_width // 2
+            # self.y = camera.y + self.screen_height // 2
 
 
             # Keep the player within the bounds of the screen

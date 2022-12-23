@@ -11,3 +11,4 @@ A Python GTA-Clone / Boilerplate
 
 Movement - WASD
 Enter/Exit Vehicle - Space
+Debug Menu - 1

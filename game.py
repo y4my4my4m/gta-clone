@@ -4,16 +4,16 @@ from camera import Camera
 from npc import NPC
 from background import Background
 class Game:
-    def __init__(self):
+    def __init__(self, screen_width, screen_height):
         # Initialize game state variables
-        self.player = Player(640,480,1024,720)  # Create a player object
+        self.player = Player(640,480,screen_width,screen_height)  # Create a player object
         self.enemies = []  # Create a list to store enemy objects
         testNPC = NPC(450,120,2,self)
         self.npcs = [testNPC]  # Create a list to store NPC objects
         self.items = []  # Create a list to store item objects
         self.score = 0  # Initialize the score
         self.vehicles = [Vehicle(230,480,5)]
-        self.camera = Camera(1024, 720, 1024, 720)
+        self.camera = Camera(screen_width, screen_height, 4640*4, 4672*4)
         self.enemies.append(testNPC)
         self.background = Background(0, 0, 4640*4, 4672*4, "img/libertycity.png")
 

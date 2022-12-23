@@ -1,19 +1,22 @@
 import pygame
 from game import Game
 
+
 # Initialize Pygame
 pygame.init()
 
 # Create a font object
 font = pygame.font.Font(None, 20)
 
+screen_width, screen_height = 1024, 720
+
 # Set up the game window
-screen = pygame.display.set_mode((1024, 720))
+screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("My GTA-style Game")
 
 # Set up the game clock
 clock = pygame.time.Clock()
-game = Game()
+game = Game(screen_width, screen_height)
 
 debug = False
 # Main game loop
