@@ -41,7 +41,7 @@ class Game:
             npc.update()
 
         # Update the background's position based on the camera's position
-        self.background.update(self.camera)
+        # self.background.update(self.camera)
 
     def render(self, screen):
         # Clear the screen

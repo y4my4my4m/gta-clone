@@ -15,10 +15,11 @@ class Background:
         self.x = 0
         self.y = 0
 
-    def update(self, camera):
+    # def update(self, camera):
         # Update the x and y position of the image based on the camera's position
-        self.x = -camera.x
-        self.y = -camera.y
+        # self.x = -camera.x
+        # self.y = -camera.y
+        
 
     def render(self, screen, camera):
         # Calculate the x and y positions of the top-left corner of the background image

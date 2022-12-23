@@ -5,8 +5,8 @@ class Player:
     def __init__(self, x, y):
         self.x = x  # Initial x position
         self.y = y  # Initial y position
-        self.pos_x = 0
-        self.pos_y = 0
+        self.world_x = self.x
+        self.world_y = self.y
         self.speed = 5  # Speed in pixels per frame
         self.image = pygame.image.load("img/player.png")  # Load the player image
         self.rect = self.image.get_rect(center=(self.x, self.y))
@@ -53,7 +53,8 @@ class Player:
         center = rotated_image.get_rect().center
         x = self.x - center[0]
         y = self.y - center[1]
-
+        self.world_x = x + camera.x
+        self.world_y = y + camera.y
         # Draw the rotated image on the screen
         if not self.hidden:
             screen.blit(rotated_image, (x,y))

@@ -32,8 +32,6 @@ while running:
             if event.key == pygame.K_SPACE:
                 # Check if the player is colliding with any cars
                 for car in game.vehicles:
-                    # there should be a hitbox in the center or detect the camera focus point
-                    # the player is always centered
                     if game.player.rect.colliderect(car.rect):
                         # The player is colliding with a car, so interact with it
                         game.player.interact_with_car(car)
@@ -50,7 +48,7 @@ while running:
         fill_surface.set_alpha(180)
         # Draw the semi-opaque black fill
         screen.blit(fill_surface, (0, 0))
-        debug_text  = font.render(f"Player position: x: {game.player.x:.2f}, y: {game.player.y:.2f}, rect: {game.player.rect}, car: {game.player.car}, in_car: {game.player.in_car}, direction: {game.player.direction:.2f}", True, (255, 255, 255))
+        debug_text  = font.render(f"Player position: x: {game.player.x:.2f}, y: {game.player.y:.2f}, wx: {game.player.world_x:.2f}, wy: {game.player.world_y:.2f}, rect: {game.player.rect}, car: {game.player.car}, in_car: {game.player.in_car}, direction: {game.player.direction:.2f}", True, (255, 255, 255))
         screen.blit(debug_text, (40, 40))
         debug_text  = font.render(f"Player rect: x: {game.player.rect}", True, (255, 255, 255))
         screen.blit(debug_text, (40, 60))
