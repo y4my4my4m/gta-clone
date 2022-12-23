@@ -2,7 +2,7 @@ import pygame
 import math
 
 class Player:
-    def __init__(self, x, y, screen_width, screen_height):
+    def __init__(self, x, y):
         self.x = x  # Initial x position
         self.y = y  # Initial y position
         self.speed = 5  # Speed in pixels per frame
@@ -12,8 +12,6 @@ class Player:
         self.in_car = False  # Whether the player is currently in a car
         self.car = None  # The car the player is currently in
         self.hidden = False  # Whether the player is hidden
-        self.screen_width = screen_width
-        self.screen_height = screen_height
 
     def update(self, camera):
         # Update the rect attribute to match the current x and y position
@@ -36,31 +34,10 @@ class Player:
 
             # Check for input from the player
             keys = pygame.key.get_pressed()
-            # if keys[pygame.K_a]:
-            #     self.x -= self.speed
-            # if keys[pygame.K_d]:
-            #     self.x += self.speed
-            # if keys[pygame.K_w]:
-            #     self.y -= self.speed
-            # if keys[pygame.K_s]:
-            #     self.y += self.speed
             camera.x -= self.speed if keys[pygame.K_a] else 0
             camera.x += self.speed if keys[pygame.K_d] else 0
             camera.y -= self.speed if keys[pygame.K_w] else 0
             camera.y += self.speed if keys[pygame.K_s] else 0
-            # self.x = camera.x + self.screen_width // 2
-            # self.y = camera.y + self.screen_height // 2
-
-
-            # Keep the player within the bounds of the screen
-            # if self.x < 0:
-            #     self.x = 0
-            # if self.x > 1024: #- self.image.get_width():
-            #     self.x = 1024 #- self.image.get_width()
-            # if self.y < 0:
-            #     self.y = 0
-            # if self.y > 720:# - self.image.get_height():
-            #     self.y = 720# - self.image.get_height()
 
     def render(self, screen, camera):
         # Apply the camera transformation to the player's rect

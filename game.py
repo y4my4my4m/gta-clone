@@ -6,7 +6,7 @@ from background import Background
 class Game:
     def __init__(self, screen_width, screen_height):
         # Initialize game state variables
-        self.player = Player(640,480,screen_width,screen_height)  # Create a player object
+        self.player = Player(screen_width/2, screen_height/2)  # Create a player object
         self.enemies = []  # Create a list to store enemy objects
         testNPC = NPC(450,120,2,self)
         self.npcs = [testNPC]  # Create a list to store NPC objects
@@ -19,7 +19,7 @@ class Game:
 
     def update(self):      
         # Update the camera's position
-        self.camera.update(self.player.x, self.player.y)
+        # self.camera.update(self.player.x, self.player.y)
 
         # Update the player's position and state
         self.player.update(self.camera)
