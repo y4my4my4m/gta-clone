@@ -12,7 +12,10 @@ class Vehicle:
         self.max_speed = 2  # Speed in pixels per frame
         self.image = pygame.image.load("img/vehicle.png")  # Load the vehicle image
         self.image = pygame.transform.scale(self.image, (125, 76))
-        self.rect = self.image.get_rect(center=(self.x, self.y))
+        # Update rect after scaling
+        self.rect = self.image.get_rect()
+        self.rect.centerx = self.x 
+        self.rect.centery = self.y
         self.occupied = False  # Whether the car is occupied by a player
         self.direction = 0  # Initial direction in degrees
         self.rotated_image = self.image
@@ -21,6 +24,8 @@ class Vehicle:
         self.y2 = 0
 
     def update(self):
+        self.rect.centerx = self.x
+        self.rect.centery = self.y
         # Update the rect attribute to match the current x and y position
         self.rect.move_ip(self.x - self.rect.x, self.y - self.rect.y)
 
@@ -61,26 +66,27 @@ class Vehicle:
         self.x2 = self.x - center[0]
         self.y2 = self.y - center[1]
 
-        # Keep the car within the bounds of the screen
-        if self.x < 0:
-            self.x = 0
-        if self.x > 1024:# - self.image.get_width():
-            self.x = 1024# - self.image.get_width()
-        if self.y < 0:
-            self.y = 0
-        if self.y > 720:# - self.image.get_height():
-            self.y = 720# - self.image.get_height()
+        # # Keep the car within the bounds of the screen
+        # if self.x < 0:
+        #     self.x = 0
+        # if self.x > 1024:# - self.image.get_width():
+        #     self.x = 1024# - self.image.get_width()
+        # if self.y < 0:
+        #     self.y = 0
+        # if self.y > 720:# - self.image.get_height():
+        #     self.y = 720# - self.image.get_height()
 
     def render(self, screen, camera):
-        # Draw the vehicle on the screen
-        # Calculate the x and y positions of the top-left corner of the background image
-        x = self.x - camera.x
-        y = self.y - camera.y
-        screen.blit(self.image, (x, y))
-        # transformed_rect = camera.apply(self)
-        # transformed_rect = pygame.transform.scale(self.image, (transformed_rect.w,transformed_rect.h))
-
-        # self.rotated_image = pygame.transform.rotate(transformed_rect, -self.direction)
+        # Get screen coordinates
+        screen_x = self.x - camera.x
+        screen_y = self.y - camera.y
         
-        # screen.blit(self.rotated_image, (self.x2, self.y2))
-
+        # Rotate image
+        rotated_image = pygame.transform.rotate(self.image, -self.direction)
+        
+        # Get the rect of the rotated image
+        rotated_rect = rotated_image.get_rect(center=(screen_x + self.rect.width/2, 
+                                                    screen_y + self.rect.height/2))
+        
+        # Draw the vehicle
+        screen.blit(rotated_image, rotated_rect.topleft)

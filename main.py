@@ -35,11 +35,19 @@ while running:
                 #     if game.player.rect.colliderect(car.rect):
                 #         # The player is colliding with a car, so interact with it
                 #         game.player.interact_with_car(car)
-                # Check if the player is colliding with any cars
+                # Check if the player is colliding with any cars# In main.py, replace the car collision check with:
                 for car in game.vehicles:
-                    transformed_player_rect = game.camera.apply(game.player)  # Transform the player's rect to screen coordinates
-                    if transformed_player_rect.colliderect(car.rect):  # Use the transformed rect for the collision check
-                        # The player is colliding with a car, so interact with it
+                    # Calculate screen-space positions for both player and car
+                    player_screen_x = game.player.world_x - game.camera.x
+                    player_screen_y = game.player.world_y - game.camera.y
+                    car_screen_x = car.x - game.camera.x 
+                    car_screen_y = car.y - game.camera.y
+                    
+                    # Create collision rectangles in screen space
+                    player_rect = pygame.Rect(player_screen_x, player_screen_y, game.player.rect.width, game.player.rect.height)
+                    car_rect = pygame.Rect(car_screen_x, car_screen_y, car.rect.width, car.rect.height)
+                    
+                    if player_rect.colliderect(car_rect):
                         game.player.interact_with_car(car)
     # Update game state
     game.update()

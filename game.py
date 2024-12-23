@@ -17,31 +17,22 @@ class Game:
         self.enemies.append(testNPC)
         self.background = Background(0, 0, 4640*4, 4672*4, "img/libertycity.png")
 
-    def update(self):      
-        # Update the camera's position
-        # self.camera.update(self.player.x, self.player.y)
+    def update(self):
+        # Update camera position based on vehicle if player is in car
+        if self.player.in_car:
+            car = self.player.car
+            self.camera.update(car.x, car.y)
+        # else:
+            # self.camera.update(self.player.world_x, self.player.world_y)
 
-        # Update the player's position and state
+        # Update game objects
         self.player.update(self.camera)
-
-        # Update the positions and states of enemies
-        # for enemy in self.enemies:
-        #     enemy.update()
-
-        # # Update the positions and states of items
-        # for item in self.items:
-        #     item.update()
-
-        # Update the positions and states of vehicles
+        
         for vehicle in self.vehicles:
             vehicle.update()
-
-        # Update the positions and states of NPCs
+            
         for npc in self.npcs:
             npc.update()
-
-        # Update the background's position based on the camera's position
-        # self.background.update(self.camera)
 
     def render(self, screen):
         # Clear the screen
