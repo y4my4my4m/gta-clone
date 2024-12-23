@@ -22,8 +22,8 @@ class Game:
         if self.player.in_car:
             car = self.player.car
             self.camera.update(car.x, car.y)
-        # else:
-            # self.camera.update(self.player.world_x, self.player.world_y)
+        else:
+            self.camera.update(self.player.world_x, self.player.world_y)
 
         # Update game objects
         self.player.update(self.camera)

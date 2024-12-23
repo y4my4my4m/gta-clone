@@ -16,48 +16,58 @@ class Player:
         self.hidden = False  # Whether the player is hidden
 
     def update(self, camera):
-        # Update the rect attribute to match the current x and y position
-        self.rect.move_ip(self.x - self.rect.x, self.y - self.rect.y)
-        # Check if the player is in a car
         if self.in_car:
             # Update the player's position to match the car's position
             self.x = self.car.x
             self.y = self.car.y
+            self.world_x = self.car.x
+            self.world_y = self.car.y
         else:
-            # Get the mouse position
+            # Get the mouse position for rotation
             mouse_x, mouse_y = pygame.mouse.get_pos()
+            
+            # Calculate screen-space position
+            screen_x = self.world_x - camera.x
+            screen_y = self.world_y - camera.y
+            
+            # Calculate angle to mouse
+            dx = mouse_x - screen_x
+            dy = mouse_y - screen_y
+            self.direction = math.degrees(math.atan2(-dy, dx))
 
-            # Calculate the angle to the mouse in radians
-            dx = mouse_x - self.x
-            dy = mouse_y - self.y
-            radians = math.atan2(-dy, dx)
-            # Convert the angle to degrees
-            self.direction = math.degrees(radians)
-
-            # Check for input from the player
+            # Move the player in world coordinates
             keys = pygame.key.get_pressed()
-            camera.x -= self.speed if keys[pygame.K_a] else 0
-            camera.x += self.speed if keys[pygame.K_d] else 0
-            camera.y -= self.speed if keys[pygame.K_w] else 0
-            camera.y += self.speed if keys[pygame.K_s] else 0
+            if keys[pygame.K_w]:
+                self.world_y -= self.speed
+            if keys[pygame.K_s]:
+                self.world_y += self.speed
+            if keys[pygame.K_a]:
+                self.world_x -= self.speed
+            if keys[pygame.K_d]:
+                self.world_x += self.speed
+
+            # Update screen position
+            self.x = screen_x
+            self.y = screen_y
+            
+        # Update rect position
+        self.rect.centerx = self.x
+        self.rect.centery = self.y
 
     def render(self, screen, camera):
-        # Apply the camera transformation to the player's rect
-        transformed_rect = camera.apply(self)
-        transformed_rect = pygame.transform.scale(self.image, (transformed_rect.w,transformed_rect.h))
-
-        # Rotate the player image
-        rotated_image = pygame.transform.rotate(transformed_rect, self.direction)
-
-        # Calculate the center of the rotated image
-        center = rotated_image.get_rect().center
-        x = self.x - center[0]
-        y = self.y - center[1]
-        self.world_x = x + camera.x
-        self.world_y = y + camera.y
-        # Draw the rotated image on the screen
         if not self.hidden:
-            screen.blit(rotated_image, (x,y))
+            # Convert world coordinates to screen coordinates
+            screen_x = self.world_x - camera.x
+            screen_y = self.world_y - camera.y
+            
+            # Rotate the player image
+            rotated_image = pygame.transform.rotate(self.image, self.direction)
+            
+            # Get the rect of the rotated image
+            rotated_rect = rotated_image.get_rect(center=(screen_x, screen_y))
+            
+            # Draw the player
+            screen.blit(rotated_image, rotated_rect.topleft)
 
     def interact_with_car(self, car):
         # Check if the player is currently in the car
